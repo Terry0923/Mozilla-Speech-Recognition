@@ -1,0 +1,10 @@
+This is the repository where I develop my deepspeech recognition.
+
+First, you need to go to https://github.com/mozilla/DeepSpeech to obtain the models for deepspeech recongition. It is impossible to upload them here since the files are too large.
+
+You can run the deepspeech by:
+
+deepspeech --model models/output_graph.pbmm --alphabet models/alphabet.txt --lm models/lm.binary --trie models/trie --audio audio/youraudiofile.wav
+
+In the directory, generate_statisitcs, is where I test the performance of Mozilla deepspeech recogntion.
+
