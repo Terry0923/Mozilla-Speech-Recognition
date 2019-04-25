@@ -1,0 +1,6 @@
+Sender: Mclaren Macomb, Medstar Alpha 1-1-7, priority one traffic.
+Receiver: McLaren Macomb, go ahead.
+Sender: Mclaren Macomb, Medstar Alpha 1-1-7, priority one for you - 52, five-two, year old male, chief complaint today - chest pain, appears to be STEMI. We did transmit you two 12-leads. ID nummber on that is going to be... 1153, one-one-five-three. First 12-lead is a regular 12 lead, showing STEMI. Second 12-lead we sent you is actually right side, it says V4R, it does appear to be a right-sided MI. At this time, the patient is alert and oriented times 4, GCS is 15. Vitals for you - blood pressure is 136, one-three-six over 98, heart rate 73. Sinus rhythm on the monitor, stats 98 percent. Nasal cannula on 4 liters. We have 324 aspirin on board, two IVs established, going to administer a nitroglycerin. Patient states left sided chest pain radiating down to his left arm, 7,8 out of 10 now. State onset about 1:30 this afternoon. Only history is hypertension. If you require nothing further we will be there in about 5 to 7 minutes.
+Receiver: Can you ask the patient if he has a cardiologist, please?
+Sender: Patient does not have a cardiologist. He only has a primary care doctor that he recently is no longer seeing.
+Receiver: Ok, thank you. Let us know of any changes and we'll see you upon arrival.
