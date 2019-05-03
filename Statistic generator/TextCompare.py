@@ -4,9 +4,21 @@ import codecs
 import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import RegexpTokenizer
+import matplotlib.pyplot as plt
+import pandas as pd
 
 # hyper parameters
 #stop_words = set(stopwords.words('english'))
+
+deep_accuracy_arr = []
+google_accuracy_arr = []
+
+#for collecting mismatching words
+sub_arr = []
+ins_arr = []
+del_arr = []
+
+
 stop_words = []
 
 # compare two text
@@ -98,18 +110,21 @@ class TextComp(object):
                 j -= 1
                 if debug:
                     lines.append("SUB\t" + r[i] + "\t" + h[j])
+                    sub_arr.append("SUB\t" + r[i] + "\t" + h[j])
             elif backtrace[i][j] == OP_INS:
                 self.I += 1
                 #self.Insertions.append(OP_INS)
                 j -= 1
                 if debug:
                     lines.append("INS\t" + "****" + "\t" + h[j])
+                    ins_arr.append("INS\t" + "****" + "\t" + h[j])
             elif backtrace[i][j] == OP_DEL:
                 self.D += 1
                 #self.Deletions.append(OP_DEL)
                 i -= 1
                 if debug:
                     lines.append("DEL\t" + r[i] + "\t" + "****")
+                    del_arr.append("DEL\t" + r[i] + "\t" + "****")
         if debug:
             lines = reversed(lines)
             for line in lines:
@@ -135,11 +150,8 @@ class TextComp(object):
     def getDeletions(self):
         return self.Deletions
 
-
 if __name__ == '__main__':
-    # a = "AB AD AC"
-    # b = "AB AD AC"
-    print("Do you want to see the detail of the performance?")
+    print("Do you want to see the detail of the performance?")    # Get number of digits
     answer = input()
     debug = False
     if(answer == "yes"):
@@ -151,13 +163,14 @@ if __name__ == '__main__':
         google_first = myfile.read().replace('\n','')
     with open ("1_Paramedic_Smith_Original_Transcript.txt", 'r') as myfile:
         original_first = myfile.read().replace('\n', '')
-        # second file
+        #second file
     with open ("2_McLaren_EMT_Radio_Call_Alpha_107_Original_deep_2019.txt", 'r') as myfile:
         latest_deep_second = myfile.read().replace('\n', '')
     with open ("2_McLaren_EMT_Radio_Call_Alpha_107_Original_google_2019.txt", 'r') as myfile:
         google_second = myfile.read().replace('\n','')
     with open ("2_McLaren_EMT_Radio_Call_Alpha_107_Original_Transcript.txt", 'r') as myfile:
         original_second = myfile.read().replace('\n', '')
+
         #thid file
     with open ("3_McLaren_EMT_Radio_Call_Alpha_117_Original_deep_2019.txt", 'r') as myfile:
         latest_deep_third= myfile.read().replace('\n', '')
@@ -198,49 +211,84 @@ if __name__ == '__main__':
     latest_deep_stats_first = TextComp(latest_deep_first, original_first)
     print("[deepspeech_first_2019] Word Error Rate:"+ str(latest_deep_stats_first.WER(debug)))
     print("[deepspeech_first_2019] Accuracy:"+str(latest_deep_stats_first.Accuracy()))
+    deep_accuracy_arr.append(latest_deep_stats_first.Accuracy())
     google_stats_first = TextComp(google_first, original_first)
     print("[google_first_2019] Word Error Rate:"+ str(google_stats_first.WER(False)))
     print("[google_first_2019] Accuracy:"+str(google_stats_first.Accuracy()))
+    google_accuracy_arr.append(google_stats_first.Accuracy())
 
     latest_deep_stats_second = TextComp(latest_deep_second, original_second)
     print("[deepspeech_second_2019] Word Error Rate:"+ str(latest_deep_stats_second.WER(debug)))
     print("[deepspeech_second_2019] Accuracy:"+str(latest_deep_stats_second.Accuracy()))
+    deep_accuracy_arr.append(latest_deep_stats_second.Accuracy())
     google_stats_second = TextComp(google_second, original_second)
     print("[google_second_2019] Word Error Rate:"+ str(google_stats_second.WER(False)))
     print("[google_second_2019] Accuracy:"+str(google_stats_second.Accuracy()))
+    google_accuracy_arr.append(google_stats_second.Accuracy())
 
     latest_deep_stats_third = TextComp(latest_deep_third, original_third)
     print("[deepspeech_third_2019] Word Error Rate:"+ str(latest_deep_stats_third.WER(debug)))
     print("[deepspeech_third_2019] Accuracy:"+str(latest_deep_stats_third.Accuracy()))
+    deep_accuracy_arr.append(latest_deep_stats_third.Accuracy())
     google_stats_third = TextComp(google_third, original_third)
     print("[google_third_2019] Word Error Rate:"+ str(google_stats_third.WER(False)))
     print("[google_third_2019] Accuracy:"+str(google_stats_third.Accuracy()))
+    google_accuracy_arr.append(google_stats_third.Accuracy())
 
     latest_deep_stats_fourth = TextComp(latest_deep_fourth, original_fourth)
     print("[deepspeech_fourth_2019] Word Error Rate:"+ str(latest_deep_stats_fourth.WER(debug)))
     print("[deepspeech_fourth_2019] Accuracy:"+str(latest_deep_stats_fourth.Accuracy()))
+    deep_accuracy_arr.append(latest_deep_stats_fourth.Accuracy())
     google_stats_fourth = TextComp(google_fourth, original_fourth)
     print("[google_fourth_2019] Word Error Rate:"+ str(google_stats_fourth.WER(False)))
     print("[google_fourth_2019] Accuracy:"+str(google_stats_fourth.Accuracy()))
+    google_accuracy_arr.append(google_stats_fourth.Accuracy())
 
     latest_deep_stats_fifth = TextComp(latest_deep_fifth, original_fifth)
     print("[deepspeech_fifth_2019] Word Error Rate:"+ str(latest_deep_stats_fifth.WER(debug)))
     print("[deepspeech_fifth_2019] Accuracy:"+str(latest_deep_stats_fifth.Accuracy()))
+    deep_accuracy_arr.append(latest_deep_stats_fifth.Accuracy())
     google_stats_fifth = TextComp(google_fifth, original_fifth)
     print("[google_fifth_2019] Word Error Rate:"+ str(google_stats_fifth.WER(False)))
     print("[google_fifth_2019] Accuracy:"+str(google_stats_fifth.Accuracy()))
+    google_accuracy_arr.append(google_stats_fifth.Accuracy())
 
     latest_deep_stats_sixth = TextComp(latest_deep_sixth, original_sixth)
     print("[deepspeech_sixth_2019] Word Error Rate:"+ str(latest_deep_stats_sixth.WER(debug)))
     print("[deepspeech_sixth_2019] Accuracy:"+str(latest_deep_stats_sixth.Accuracy()))
+    deep_accuracy_arr.append(latest_deep_stats_sixth.Accuracy())
     google_stats_sixth = TextComp(google_sixth, original_sixth)
     print("[google_sixth_2019] Word Error Rate:"+ str(google_stats_sixth.WER(False)))
     print("[google_sixth_2019] Accuracy:"+str(google_stats_sixth.Accuracy()))
+    google_accuracy_arr.append(google_stats_sixth.Accuracy())
 
     latest_deep_stats_seventh = TextComp(latest_deep_seventh, original_seventh)
     print("[deepspeech_seventh_2019] Word Error Rate:"+ str(latest_deep_stats_seventh.WER(debug)))
     print("[deepspeech_seventh_2019] Accuracy:"+str(latest_deep_stats_seventh.Accuracy()))
+    deep_accuracy_arr.append(latest_deep_stats_seventh.Accuracy())
     google_stats_seventh = TextComp(google_seventh, original_seventh)
     print("[google_seventh_2019] Word Error Rate:"+ str(google_stats_seventh.WER(False)))
     print("[google_seventh_2019] Accuracy:"+str(google_stats_seventh.Accuracy()))
+    google_accuracy_arr.append(google_stats_seventh.Accuracy())
 
+    #write output to text files
+    with open('sub_error.txt', 'w') as f:
+        for item in sub_arr:
+            f.write("%s\n" % item)
+    with open('ins_error.txt', 'w') as f:
+        for item in ins_arr:
+            f.write("%s\n" % item)
+    with open('del_error.txt', 'w') as f:
+        for item in del_arr:
+            f.write("%s\n" % item)
+    # data visualization
+    labels = ('audio_1', 'audio_2', 'audio_3', 'audio_4'
+    , 'audio_5', 'audio_6', 'audio_7')
+
+    df = pd.DataFrame(np.c_[deep_accuracy_arr,google_accuracy_arr], index=labels, columns=['Mozilla Deepspeech Recognition', 'Google Speech Recognition'])
+
+    ax = df.plot.bar()
+    ax.set_xlabel("audio file")
+    ax.set_ylabel("Accuracy")
+    plt.suptitle("Mozilla Deepspeech Performance without background noise")
+    plt.show()
