@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 # hyper parameters
-#stop_words = set(stopwords.words('english'))
+stop_words = set(stopwords.words('english'))
 incorrect_deep_accuracy_arr = [] #accuracy of deepspeech with number transcription
 correct_deep_accuracy_arr = [] #accuracy of deepspeech with english word transcription
 google_accuracy_arr = [] #accuracy of google speech
@@ -19,7 +19,7 @@ ins_arr = []
 del_arr = []
 
 
-stop_words = []
+# stop_words = []
 # helper function
 def num2words(num):
 	nums_20_90 = ['twenty','thirty','forty','fifty','sixty','seventy','eighty','ninety']
